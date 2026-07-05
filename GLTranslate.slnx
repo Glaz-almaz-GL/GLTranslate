@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="GLTranslate.Abstractions/GLTranslate.Abstractions.csproj" Id="8ef45718-5278-42d6-aafa-b2f19bff1170" />
+  <Project Path="GLTranslate.Providers.Google.Tests/GLTranslate.Providers.Google.Tests.csproj" Id="018e7265-6675-4a19-b4a1-19e63c9b23d2" />
+  <Project Path="GLTranslate.Providers.Google/GLTranslate.Providers.Google.csproj" Id="63547013-2860-45b2-8cc0-a0096d1bf24b" />
+</Solution>
