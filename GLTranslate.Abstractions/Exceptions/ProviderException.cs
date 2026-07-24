@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GLTranslate.Abstractions.Results
+namespace GLTranslate.Abstractions.Exceptions
 {
-    internal class TranslationResult
+    internal class ProviderException
     {
     }
 }

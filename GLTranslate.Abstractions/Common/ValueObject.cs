@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GLTranslate.Abstractions.Results
+namespace GLTranslate.Abstractions.Common
 {
-    internal class TranslationResult
+    internal class ValueObject
     {
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GLTranslate.Abstractions.Results
 {
-    internal class TranslationResult
+    internal class LanguageDetectionResult
     {
     }
 }
