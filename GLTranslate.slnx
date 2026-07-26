@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/Solution Items/">
     <File Path="ClassRule.md" />
+    <File Path="Constitution.md" />
     <File Path="Dictionary.md" />
   </Folder>
   <Project Path="GLTranslate.Abstractions/GLTranslate.Abstractions.csproj" Id="8ef45718-5278-42d6-aafa-b2f19bff1170" />

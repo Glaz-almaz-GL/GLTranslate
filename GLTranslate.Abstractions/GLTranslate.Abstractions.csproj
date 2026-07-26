@@ -12,9 +12,4 @@
 		<None Remove="Ex\**" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Constants\" />
-	  <Folder Include="Extensions\" />
-	</ItemGroup>
-
 </Project>
