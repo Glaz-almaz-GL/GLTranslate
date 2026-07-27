@@ -1,27 +1,19 @@
-﻿using GLTranslate.Abstractions.Linguistics.Regions;
+using GLTranslate.Abstractions.Linguistics.Regions;
+using GLTranslate.Domain.Linguistics.Regions.Generated;
 using GLTranslate.Domain.Registries;
-using System.Collections.Immutable;
 
 namespace GLTranslate.Domain.Linguistics.Regions;
 
 /// <summary>
 /// Represents an immutable registry of region entities.
 /// </summary>
-public sealed class RegionRegistry(IEnumerable<Region> regions) : ImmutableRegistry<Region, RegionId>(regions)
+/// <remarks>
+/// Provides read-only lookup of regions by identifier.
+/// </remarks>
+public sealed partial class RegionRegistry(IEnumerable<Region> regions) : ImmutableRegistry<Region, RegionId>(regions)
 {
     /// <summary>
-    /// Gets the default registry containing the built-in scripts.
+    /// Gets the default registry, populated from ISO 3166-1 region data.
     /// </summary>
-    public static readonly RegionRegistry Default = new(CreateDefaultScripts());
-
-    private static ImmutableArray<Region> CreateDefaultScripts()
-    {
-        return
-        [
-            // Latin,
-            // Cyrillic,
-            // Arabic,
-            // ...
-        ];
-    }
+    public static readonly RegionRegistry Default = new(RegionRegistryData.All);
 }

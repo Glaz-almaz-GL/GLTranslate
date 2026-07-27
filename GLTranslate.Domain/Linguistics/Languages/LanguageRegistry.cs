@@ -1,6 +1,6 @@
 ﻿using GLTranslate.Abstractions.Linguistics.Languages;
+using GLTranslate.Domain.Linguistics.Languages.Generated;
 using GLTranslate.Domain.Registries;
-using System.Collections.Immutable;
 
 namespace GLTranslate.Domain.Linguistics.Languages;
 
@@ -10,21 +10,10 @@ namespace GLTranslate.Domain.Linguistics.Languages;
 /// <remarks>
 /// Provides read-only lookup of languages by identifier.
 /// </remarks>
-public sealed class LanguageRegistry(IEnumerable<Language> languages) : ImmutableRegistry<Language, LanguageId>(languages)
+public sealed partial class LanguageRegistry(IEnumerable<Language> languages) : ImmutableRegistry<Language, LanguageId>(languages)
 {
     /// <summary>
-    /// Gets the default registry containing the built-in scripts.
+    /// Gets the default registry, populated from ISO 639 language data.
     /// </summary>
-    public static readonly LanguageRegistry Default = new(CreateDefaultScripts());
-
-    private static ImmutableArray<Language> CreateDefaultScripts()
-    {
-        return
-        [
-            // Latin,
-            // Cyrillic,
-            // Arabic,
-            // ...
-        ];
-    }
+    public static readonly LanguageRegistry Default = new(LanguageRegistryData.All);
 }
