@@ -79,10 +79,13 @@ public sealed class CodeSet<TCode> : IReadOnlyList<TCode>
     public T Get<T>()
         where T : class, TCode
     {
-        return !_codes.TryGetValue(typeof(T), out TCode? value)
-            ? throw new InvalidOperationException(
-                $"Code '{typeof(T).Name}' is unavailable.")
-            : (T)value;
+        if (!_codes.TryGetValue(typeof(T), out TCode? value))
+        {
+            // Code unavailable
+            throw new InvalidOperationException($"Code '{typeof(T).Name}' is unavailable.");
+        }
+
+        return (T)value;
     }
 
     /// <summary>
@@ -173,6 +176,13 @@ public sealed class CodeSet<TCode> : IReadOnlyList<TCode>
     {
         ArgumentNullException.ThrowIfNull(type);
 
+        if (!typeof(TCode).IsAssignableFrom(type))
+        {
+            // Not assignable type
+            value = null;
+            return false;
+        }
+
         return _codes.TryGetValue(type, out value);
     }
 
@@ -212,10 +222,23 @@ public sealed class CodeSet<TCode> : IReadOnlyList<TCode>
         return _codes.ContainsKey(type);
     }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Gets the code at the specified index.
+    /// </summary>
+    /// <param name="index">
+    /// The zero-based index of the code to retrieve.
+    /// </param>
+    /// <returns>
+    /// The code stored at the specified index.
+    /// </returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// Thrown when <paramref name="index"/> is outside the valid range.
+    /// </exception>
     public TCode this[int index] => _values[index];
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Gets the number of codes in the collection.
+    /// </summary>
     public int Count => _values.Length;
 
     /// <summary>

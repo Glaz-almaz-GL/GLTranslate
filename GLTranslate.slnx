@@ -1,10 +1,7 @@
 <Solution>
   <Folder Name="/Solution Items/">
-    <File Path="ClassRule.md" />
     <File Path="Constitution.md" />
-    <File Path="Dictionary.md" />
   </Folder>
   <Project Path="GLTranslate.Abstractions/GLTranslate.Abstractions.csproj" Id="8ef45718-5278-42d6-aafa-b2f19bff1170" />
-  <Project Path="GLTranslate.Providers.Google.Tests/GLTranslate.Providers.Google.Tests.csproj" Id="018e7265-6675-4a19-b4a1-19e63c9b23d2" />
-  <Project Path="GLTranslate.Providers.Google/GLTranslate.Providers.Google.csproj" Id="63547013-2860-45b2-8cc0-a0096d1bf24b" />
+  <Project Path="GLTranslate.Domain/GLTranslate.Domain.csproj" Id="908253e2-7d5d-4e92-bd07-3446e17da2a0" />
 </Solution>

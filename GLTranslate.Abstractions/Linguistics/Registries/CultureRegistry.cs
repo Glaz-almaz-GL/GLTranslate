@@ -1,6 +1,0 @@
-﻿namespace GLTranslate.Abstractions.Linguistics.Registries
-{
-    internal class CultureRegistry
-    {
-    }
-}

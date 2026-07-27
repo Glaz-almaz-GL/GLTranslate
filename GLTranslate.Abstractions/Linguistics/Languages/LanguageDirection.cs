@@ -1,8 +1,17 @@
-﻿namespace GLTranslate.Abstractions.Linguistics.Languages
+﻿namespace GLTranslate.Abstractions.Linguistics.Languages;
+
+/// <summary>
+/// Specifies the writing direction of a language.
+/// </summary>
+public enum LanguageDirection
 {
-    public enum LanguageDirection
-    {
-        LeftToRight,
-        RightToLeft
-    }
+    /// <summary>
+    /// The language is written from left to right.
+    /// </summary>
+    LeftToRight,
+
+    /// <summary>
+    /// The language is written from right to left.
+    /// </summary>
+    RightToLeft
 }

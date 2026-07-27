@@ -1,5 +1,4 @@
 ﻿using GLTranslate.Abstractions.Common;
-using GLTranslate.Abstractions.Interfaces;
 
 namespace GLTranslate.Abstractions.Linguistics.Languages;
 
@@ -10,4 +9,4 @@ namespace GLTranslate.Abstractions.Linguistics.Languages;
 /// A language identifier is independent from any external language coding
 /// standard or translation provider.
 /// </remarks>
-public sealed class LanguageId(string value) : StringValueObject(value), ICode;
+public sealed class LanguageId(string value) : StringValueObject(value);

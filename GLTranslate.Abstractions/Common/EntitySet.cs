@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GLTranslate.Abstractions.Interfaces;
+using System.Collections;
 using System.Collections.Immutable;
 
 namespace GLTranslate.Abstractions.Common;
@@ -16,7 +17,12 @@ namespace GLTranslate.Abstractions.Common;
 /// <typeparam name="TEntity">
 /// The entity type contained in the collection.
 /// </typeparam>
-public sealed class EntitySet<TEntity> : IReadOnlyList<TEntity> where TEntity : class
+public sealed class EntitySet<TEntity, TId> :
+    IReadOnlyList<TEntity>
+    where TId : notnull
+    where TEntity :
+    class,
+    IIdentifiable<TId>
 {
     private readonly ImmutableArray<TEntity> _values;
 
@@ -54,10 +60,23 @@ public sealed class EntitySet<TEntity> : IReadOnlyList<TEntity> where TEntity : 
         _values = [.. values];
     }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Gets the entity at the specified index.
+    /// </summary>
+    /// <param name="index">
+    /// The zero-based index of the entity to retrieve.
+    /// </param>
+    /// <returns>
+    /// The entity stored at the specified index.
+    /// </returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// Thrown when <paramref name="index"/> is outside the valid range.
+    /// </exception>
     public TEntity this[int index] => _values[index];
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Gets the number of entities in the collection.
+    /// </summary>
     public int Count => _values.Length;
 
     /// <summary>
