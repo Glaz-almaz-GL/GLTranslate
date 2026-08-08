@@ -1,6 +1,6 @@
 using GLTranslate.Abstractions.Common;
 
-namespace GLTranslate.Abstractions.Translation;
+namespace GLTranslate.Abstractions.Transliteration;
 
 /// <summary>
 /// Represents a phonetic rendering of text that shows how it is

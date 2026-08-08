@@ -1,6 +1,6 @@
 using GLTranslate.Abstractions.Interfaces;
 
-namespace GLTranslate.Abstractions.Translation;
+namespace GLTranslate.Abstractions.Providers;
 
 /// <summary>
 /// Represents the common shape of every provider capability request.

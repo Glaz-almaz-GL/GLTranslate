@@ -1,4 +1,6 @@
-namespace GLTranslate.Abstractions.Translation;
+using GLTranslate.Abstractions.Providers;
+
+namespace GLTranslate.Abstractions.TextToSpeech;
 
 /// <summary>
 /// Represents a text-to-speech service integration.

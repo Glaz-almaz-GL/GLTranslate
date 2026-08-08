@@ -1,4 +1,4 @@
-namespace GLTranslate.Abstractions.Translation;
+namespace GLTranslate.Abstractions.Providers;
 
 /// <summary>
 /// Represents a single operation a provider can perform.
@@ -6,7 +6,7 @@ namespace GLTranslate.Abstractions.Translation;
 /// <remarks>
 /// <para>
 /// Providers implement one interface per capability they support
-/// (for example <see cref="ITranslationProvider"/>) rather than declaring
+/// (for example <c>ITextTranslationProvider</c>) rather than declaring
 /// support through a shared flags enumeration. Adding a new capability
 /// therefore never requires modifying an existing type, consistent with
 /// the Open/Closed Principle.

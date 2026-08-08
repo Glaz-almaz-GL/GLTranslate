@@ -1,8 +1,7 @@
-namespace GLTranslate.Abstractions.Translation;
+namespace GLTranslate.Abstractions.Providers;
 
 /// <summary>
-/// Represents the public entry point for performing a translation
-/// operation.
+/// Represents the public entry point for performing a provider operation.
 /// </summary>
 /// <remarks>
 /// <para>
@@ -12,9 +11,9 @@ namespace GLTranslate.Abstractions.Translation;
 /// one provider fails), without changing this contract.
 /// </para>
 /// <para>
-/// Each concrete operation (text, image, audio, ...) is exposed through its
-/// own specialization of this interface, mirroring the corresponding
-/// provider capability.
+/// Each concrete operation (text translation, transliteration, text to
+/// speech, ...) is exposed through its own specialization of this
+/// interface, mirroring the corresponding provider capability.
 /// </para>
 /// <para>
 /// Implementations are expected to be immutable and thread-safe.
@@ -26,7 +25,7 @@ namespace GLTranslate.Abstractions.Translation;
 /// <typeparam name="TResult">
 /// The immutable result type describing the operation's outcome.
 /// </typeparam>
-public interface ITranslationClient<in TRequest, TResult>
+public interface IOperationClient<in TRequest, TResult>
     where TRequest : ProviderRequest
     where TResult : ProviderResult
 {

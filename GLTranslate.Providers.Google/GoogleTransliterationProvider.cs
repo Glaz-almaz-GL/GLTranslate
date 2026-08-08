@@ -1,5 +1,6 @@
 using GLTranslate.Abstractions.Linguistics.Languages;
-using GLTranslate.Abstractions.Translation;
+using GLTranslate.Abstractions.Providers;
+using GLTranslate.Abstractions.Transliteration;
 using GLTranslate.Providers.Google.Internal;
 
 namespace GLTranslate.Providers.Google;
@@ -62,7 +63,7 @@ public sealed class GoogleTransliterationProvider : ITransliterationProvider, ID
     }
 
     /// <inheritdoc/>
-    /// <exception cref="TranslationProviderException">
+    /// <exception cref="ProviderException">
     /// Thrown when <paramref name="request"/> specifies a language unknown
     /// to GLTranslate, or when the underlying request to Google Translate
     /// fails or returns an unexpected response.

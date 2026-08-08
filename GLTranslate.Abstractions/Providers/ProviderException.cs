@@ -1,17 +1,17 @@
-namespace GLTranslate.Abstractions.Translation;
+namespace GLTranslate.Abstractions.Providers;
 
 /// <summary>
-/// Represents an error raised by a translation provider while executing a
-/// capability (for example a network failure, an unsupported language, or
-/// a rejected request).
+/// Represents an error raised by a provider while executing a capability
+/// (for example a network failure, an unsupported language, or a
+/// rejected request).
 /// </summary>
 /// <remarks>
 /// <para>
 /// Callers can catch this exception to handle provider failures uniformly,
-/// independent of which provider raised them. Providers should throw this
-/// exception (or a more specific subclass of it) instead of letting
-/// provider-specific exceptions (for example <see cref="HttpRequestException"/>)
-/// escape their implementation.
+/// independent of which provider or capability raised them. Providers
+/// should throw this exception (or a more specific subclass of it) instead
+/// of letting provider-specific exceptions (for example
+/// <see cref="HttpRequestException"/>) escape their implementation.
 /// </para>
 /// <para>
 /// This type is not sealed so providers can introduce more specific
@@ -19,7 +19,7 @@ namespace GLTranslate.Abstractions.Translation;
 /// contract.
 /// </para>
 /// </remarks>
-public class TranslationProviderException : Exception
+public class ProviderException : Exception
 {
     /// <summary>
     /// Gets the display name of the provider that raised the exception.
@@ -27,7 +27,7 @@ public class TranslationProviderException : Exception
     public string ProviderName { get; }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="TranslationProviderException"/> class.
+    /// Initializes a new instance of the <see cref="ProviderException"/> class.
     /// </summary>
     /// <param name="providerName">
     /// The display name of the provider that raised the exception.
@@ -39,7 +39,7 @@ public class TranslationProviderException : Exception
     /// Thrown when <paramref name="providerName"/> is empty or consists
     /// only of white-space characters.
     /// </exception>
-    public TranslationProviderException(string providerName, string message)
+    public ProviderException(string providerName, string message)
         : base(message)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(providerName);
@@ -48,7 +48,7 @@ public class TranslationProviderException : Exception
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="TranslationProviderException"/> class.
+    /// Initializes a new instance of the <see cref="ProviderException"/> class.
     /// </summary>
     /// <param name="providerName">
     /// The display name of the provider that raised the exception.
@@ -63,7 +63,7 @@ public class TranslationProviderException : Exception
     /// Thrown when <paramref name="providerName"/> is empty or consists
     /// only of white-space characters.
     /// </exception>
-    public TranslationProviderException(string providerName, string message, Exception innerException)
+    public ProviderException(string providerName, string message, Exception innerException)
         : base(message, innerException)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(providerName);

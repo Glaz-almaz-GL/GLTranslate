@@ -1,6 +1,7 @@
 using GLTranslate.Abstractions.Linguistics.Languages;
+using GLTranslate.Abstractions.Providers;
 
-namespace GLTranslate.Abstractions.Translation;
+namespace GLTranslate.Abstractions.TextToSpeech;
 
 /// <summary>
 /// Represents the immutable outcome of a single text-to-speech operation.

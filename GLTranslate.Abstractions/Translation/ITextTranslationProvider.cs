@@ -1,3 +1,5 @@
+using GLTranslate.Abstractions.Providers;
+
 namespace GLTranslate.Abstractions.Translation;
 
 /// <summary>

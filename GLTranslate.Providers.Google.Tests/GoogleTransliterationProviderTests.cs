@@ -1,5 +1,6 @@
 using GLTranslate.Abstractions.Linguistics.Languages;
-using GLTranslate.Abstractions.Translation;
+using GLTranslate.Abstractions.Providers;
+using GLTranslate.Abstractions.Transliteration;
 using System.Net;
 using System.Text;
 
@@ -42,7 +43,7 @@ public sealed class GoogleTransliterationProviderTests
         using HttpClient httpClient = new(handler);
         using GoogleTransliterationProvider provider = new(httpClient);
 
-        TransliterationRequest request = new(new TranslationText("Привет, мир!"), new LanguageId("russian"));
+        TransliterationRequest request = new(new ProviderText("Привет, мир!"), new LanguageId("russian"));
 
         TransliterationResult result = await provider.ExecuteAsync(request);
 
@@ -65,7 +66,7 @@ public sealed class GoogleTransliterationProviderTests
         using HttpClient httpClient = new(handler);
         using GoogleTransliterationProvider provider = new(httpClient);
 
-        TransliterationRequest request = new(new TranslationText("こんにちは世界"));
+        TransliterationRequest request = new(new ProviderText("こんにちは世界"));
 
         TransliterationResult result = await provider.ExecuteAsync(request);
 
@@ -86,7 +87,7 @@ public sealed class GoogleTransliterationProviderTests
         using HttpClient httpClient = new(handler);
         using GoogleTransliterationProvider provider = new(httpClient);
 
-        TransliterationRequest request = new(new TranslationText("Hello world"), new LanguageId("english"));
+        TransliterationRequest request = new(new ProviderText("Hello world"), new LanguageId("english"));
 
         TransliterationResult result = await provider.ExecuteAsync(request);
 

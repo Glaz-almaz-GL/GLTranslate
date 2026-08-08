@@ -1,6 +1,6 @@
 using GLTranslate.Abstractions.Common;
 
-namespace GLTranslate.Abstractions.Translation;
+namespace GLTranslate.Abstractions.TextToSpeech;
 
 /// <summary>
 /// Represents the MIME content type of synthesized audio data (for

@@ -1,4 +1,5 @@
 using GLTranslate.Abstractions.Linguistics.Languages;
+using GLTranslate.Abstractions.Providers;
 using GLTranslate.Abstractions.Translation;
 using System.Net;
 using System.Text;
@@ -43,7 +44,7 @@ public sealed class GoogleTranslationProviderTests
         using GoogleTranslationProvider provider = new(httpClient);
 
         TextTranslationRequest request = new(
-            new TranslationText("Hello"),
+            new ProviderText("Hello"),
             new LanguageId("french"),
             new LanguageId("english"));
 
@@ -69,7 +70,7 @@ public sealed class GoogleTranslationProviderTests
         using HttpClient httpClient = new(handler);
         using GoogleTranslationProvider provider = new(httpClient);
 
-        TextTranslationRequest request = new(new TranslationText("Hello"), new LanguageId("russian"));
+        TextTranslationRequest request = new(new ProviderText("Hello"), new LanguageId("russian"));
 
         TextTranslationResult result = await provider.ExecuteAsync(request);
 
@@ -93,7 +94,7 @@ public sealed class GoogleTranslationProviderTests
     {
         using GoogleTranslationProvider provider = new();
 
-        TextTranslationRequest request = new(new TranslationText("Good morning!"), new LanguageId("russian"));
+        TextTranslationRequest request = new(new ProviderText("Good morning!"), new LanguageId("russian"));
         TextTranslationResult result = await provider.ExecuteAsync(request);
 
         Assert.False(string.IsNullOrWhiteSpace(result.TranslatedText.Value));

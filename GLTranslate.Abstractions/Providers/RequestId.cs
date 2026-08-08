@@ -1,7 +1,7 @@
 using GLTranslate.Abstractions.Common;
 using System.Diagnostics;
 
-namespace GLTranslate.Abstractions.Translation;
+namespace GLTranslate.Abstractions.Providers;
 
 /// <summary>
 /// Represents the unique identifier of a single provider capability request.

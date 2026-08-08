@@ -1,6 +1,7 @@
 using GLTranslate.Abstractions.Linguistics.Languages;
+using GLTranslate.Abstractions.Providers;
 
-namespace GLTranslate.Abstractions.Translation;
+namespace GLTranslate.Abstractions.Transliteration;
 
 /// <summary>
 /// Represents the immutable parameters of a single text transliteration
@@ -8,10 +9,10 @@ namespace GLTranslate.Abstractions.Translation;
 /// </summary>
 /// <remarks>
 /// <para>
-/// Unlike <see cref="TextTranslationRequest"/>, this request only concerns
-/// a single language: the one the input text is written in. Transliteration
-/// renders that same text phonetically; it does not translate it into
-/// another language.
+/// Unlike a text translation request, this request only concerns a single
+/// language: the one the input text is written in. Transliteration renders
+/// that same text phonetically; it does not translate it into another
+/// language.
 /// </para>
 /// <para>
 /// Instances of this class are immutable and thread-safe.
@@ -22,7 +23,7 @@ public sealed class TransliterationRequest : ProviderRequest
     /// <summary>
     /// Gets the text to transliterate.
     /// </summary>
-    public TranslationText Text { get; }
+    public ProviderText Text { get; }
 
     /// <summary>
     /// Gets the identifier of the language the text is written in.
@@ -49,7 +50,7 @@ public sealed class TransliterationRequest : ProviderRequest
     /// <exception cref="ArgumentNullException">
     /// Thrown when <paramref name="text"/> is <see langword="null"/>.
     /// </exception>
-    public TransliterationRequest(TranslationText text, LanguageId? languageId = null, RequestId? id = null)
+    public TransliterationRequest(ProviderText text, LanguageId? languageId = null, RequestId? id = null)
         : base(id)
     {
         ArgumentNullException.ThrowIfNull(text);

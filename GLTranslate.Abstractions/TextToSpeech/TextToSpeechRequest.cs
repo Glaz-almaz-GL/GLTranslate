@@ -1,6 +1,7 @@
 using GLTranslate.Abstractions.Linguistics.Languages;
+using GLTranslate.Abstractions.Providers;
 
-namespace GLTranslate.Abstractions.Translation;
+namespace GLTranslate.Abstractions.TextToSpeech;
 
 /// <summary>
 /// Represents the immutable parameters of a single text-to-speech
@@ -14,7 +15,7 @@ public sealed class TextToSpeechRequest : ProviderRequest
     /// <summary>
     /// Gets the text to synthesize.
     /// </summary>
-    public TranslationText Text { get; }
+    public ProviderText Text { get; }
 
     /// <summary>
     /// Gets the identifier of the language the text is written in, which
@@ -38,7 +39,7 @@ public sealed class TextToSpeechRequest : ProviderRequest
     /// Thrown when <paramref name="text"/> or <paramref name="languageId"/>
     /// is <see langword="null"/>.
     /// </exception>
-    public TextToSpeechRequest(TranslationText text, LanguageId languageId, RequestId? id = null)
+    public TextToSpeechRequest(ProviderText text, LanguageId languageId, RequestId? id = null)
         : base(id)
     {
         ArgumentNullException.ThrowIfNull(text);

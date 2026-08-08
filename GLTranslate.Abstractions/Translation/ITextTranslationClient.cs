@@ -1,3 +1,5 @@
+using GLTranslate.Abstractions.Providers;
+
 namespace GLTranslate.Abstractions.Translation;
 
 /// <summary>
@@ -6,4 +8,4 @@ namespace GLTranslate.Abstractions.Translation;
 /// <remarks>
 /// Implementations are expected to be immutable and thread-safe.
 /// </remarks>
-public interface ITextTranslationClient : ITranslationClient<TextTranslationRequest, TextTranslationResult>;
+public interface ITextTranslationClient : IOperationClient<TextTranslationRequest, TextTranslationResult>;

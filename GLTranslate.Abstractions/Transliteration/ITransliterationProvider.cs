@@ -1,4 +1,6 @@
-namespace GLTranslate.Abstractions.Translation;
+using GLTranslate.Abstractions.Providers;
+
+namespace GLTranslate.Abstractions.Transliteration;
 
 /// <summary>
 /// Represents a transliteration service integration.

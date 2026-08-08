@@ -1,4 +1,4 @@
-using GLTranslate.Abstractions.Translation;
+using GLTranslate.Abstractions.Providers;
 using GLTranslate.Providers.Google.Internal;
 using System.Net;
 using System.Text;
@@ -55,7 +55,7 @@ public sealed class GoogleTranslationEngineTests
         using HttpClient httpClient = new(handler);
         GoogleTranslationEngine engine = new(httpClient);
 
-        TranslationProviderException exception = await Assert.ThrowsAsync<TranslationProviderException>(
+        ProviderException exception = await Assert.ThrowsAsync<ProviderException>(
             () => engine.TranslateAsync("Hello", "en", "ru"));
 
         Assert.Equal("Google", exception.ProviderName);
@@ -71,7 +71,7 @@ public sealed class GoogleTranslationEngineTests
         using HttpClient httpClient = new(handler);
         GoogleTranslationEngine engine = new(httpClient);
 
-        TranslationProviderException exception = await Assert.ThrowsAsync<TranslationProviderException>(
+        ProviderException exception = await Assert.ThrowsAsync<ProviderException>(
             () => engine.TranslateAsync("Hello", "en", "ru"));
 
         Assert.Equal("Google", exception.ProviderName);

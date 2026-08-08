@@ -1,4 +1,5 @@
 using GLTranslate.Abstractions.Linguistics.Languages;
+using GLTranslate.Abstractions.Providers;
 using GLTranslate.Abstractions.Translation;
 using GLTranslate.Providers.Google.Internal;
 
@@ -57,7 +58,7 @@ public sealed class GoogleTranslationProvider : ITextTranslationProvider, IDispo
     }
 
     /// <inheritdoc/>
-    /// <exception cref="TranslationProviderException">
+    /// <exception cref="ProviderException">
     /// Thrown when <paramref name="request"/> specifies a language unknown
     /// to GLTranslate, or when the underlying request to Google Translate
     /// fails or returns an unexpected response.
@@ -78,7 +79,7 @@ public sealed class GoogleTranslationProvider : ITextTranslationProvider, IDispo
 
         return new TextTranslationResult(
             request.Id,
-            new TranslationText(translatedText),
+            new ProviderText(translatedText),
             resolvedSourceLanguageId,
             request.TargetLanguageId,
             wasSourceLanguageDetected: request.SourceLanguageId is null);

@@ -1,4 +1,4 @@
-using GLTranslate.Abstractions.Translation;
+using GLTranslate.Abstractions.Providers;
 using System.Net.Http.Json;
 using System.Text.Json;
 
@@ -70,7 +70,7 @@ internal sealed class GoogleTranslationEngine
     /// or <paramref name="targetLanguageCode"/> is empty or consists only
     /// of white-space characters.
     /// </exception>
-    /// <exception cref="TranslationProviderException">
+    /// <exception cref="ProviderException">
     /// Thrown when the request fails, or when the response cannot be
     /// understood.
     /// </exception>
@@ -120,7 +120,7 @@ internal sealed class GoogleTranslationEngine
     /// Thrown when <paramref name="text"/> or <paramref name="sourceLanguageCode"/>
     /// is empty or consists only of white-space characters.
     /// </exception>
-    /// <exception cref="TranslationProviderException">
+    /// <exception cref="ProviderException">
     /// Thrown when the request fails, or when the response cannot be
     /// understood.
     /// </exception>
@@ -151,7 +151,7 @@ internal sealed class GoogleTranslationEngine
     /// <param name="includeRomanization">Whether to include romanization in the response.</param>
     /// <param name="cancellationToken">A token that can be used to cancel the operation.</param>
     /// <returns>A task that completes with the response from the Google Translate web endpoint.</returns>
-    /// <exception cref="TranslationProviderException">Thrown when the request fails or the response cannot be understood.</exception>
+    /// <exception cref="ProviderException">Thrown when the request fails or the response cannot be understood.</exception>
     private async Task<GoogleTranslationResponse> SendAsync(
         string text,
         string sourceLanguageCode,
@@ -186,15 +186,15 @@ internal sealed class GoogleTranslationEngine
             return await httpResponse.Content
                 .ReadFromJsonAsync(GoogleTranslationJsonContext.Default.GoogleTranslationResponse, cancellationToken)
                 .ConfigureAwait(false)
-                ?? throw new TranslationProviderException(ProviderName, "Google Translate returned an empty response.");
+                ?? throw new ProviderException(ProviderName, "Google Translate returned an empty response.");
         }
         catch (HttpRequestException exception)
         {
-            throw new TranslationProviderException(ProviderName, "The request to Google Translate failed.", exception);
+            throw new ProviderException(ProviderName, "The request to Google Translate failed.", exception);
         }
         catch (JsonException exception)
         {
-            throw new TranslationProviderException(ProviderName, "Google Translate returned an unexpected response format.", exception);
+            throw new ProviderException(ProviderName, "Google Translate returned an unexpected response format.", exception);
         }
     }
 }

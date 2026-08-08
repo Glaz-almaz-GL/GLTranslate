@@ -1,4 +1,5 @@
 using GLTranslate.Abstractions.Linguistics.Languages;
+using GLTranslate.Abstractions.Providers;
 
 namespace GLTranslate.Abstractions.Translation;
 
@@ -14,7 +15,7 @@ public sealed class TextTranslationRequest : ProviderRequest
     /// <summary>
     /// Gets the text to translate.
     /// </summary>
-    public TranslationText Text { get; }
+    public ProviderText Text { get; }
 
     /// <summary>
     /// Gets the identifier of the language to translate the text into.
@@ -51,7 +52,7 @@ public sealed class TextTranslationRequest : ProviderRequest
     /// is <see langword="null"/>.
     /// </exception>
     public TextTranslationRequest(
-        TranslationText text,
+        ProviderText text,
         LanguageId targetLanguageId,
         LanguageId? sourceLanguageId = null,
         RequestId? id = null)

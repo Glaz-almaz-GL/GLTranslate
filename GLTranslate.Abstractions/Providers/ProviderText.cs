@@ -1,12 +1,12 @@
 using GLTranslate.Abstractions.Common;
 
-namespace GLTranslate.Abstractions.Translation;
+namespace GLTranslate.Abstractions.Providers;
 
 /// <summary>
-/// Represents a piece of text involved in a translation operation, either
-/// as the source text to translate or as the translated output.
+/// Represents a piece of natural-language text exchanged with a provider,
+/// such as text to translate, translated output, or text to transliterate.
 /// </summary>
 /// <remarks>
 /// Instances of this class are immutable and thread-safe.
 /// </remarks>
-public sealed class TranslationText(string value) : StringValueObject(value);
+public sealed class ProviderText(string value) : StringValueObject(value);

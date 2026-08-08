@@ -1,5 +1,5 @@
 using GLTranslate.Abstractions.Linguistics.Languages;
-using GLTranslate.Abstractions.Translation;
+using GLTranslate.Abstractions.Providers;
 using GLTranslate.Domain.Linguistics.Languages;
 using GLTranslate.Domain.Linguistics.Languages.Codes;
 using System.Collections.Immutable;
@@ -35,7 +35,7 @@ internal static class GoogleLanguageCodeResolver
     /// The ISO 639-1 code, or <c>"auto"</c> when <paramref name="languageId"/>
     /// is <see langword="null"/>.
     /// </returns>
-    /// <exception cref="TranslationProviderException">
+    /// <exception cref="ProviderException">
     /// Thrown when <paramref name="languageId"/> is not known to GLTranslate,
     /// or when the resolved language has no ISO 639-1 code.
     /// </exception>
@@ -54,7 +54,7 @@ internal static class GoogleLanguageCodeResolver
         }
         catch (KeyNotFoundException exception)
         {
-            throw new TranslationProviderException(
+            throw new ProviderException(
                 ProviderName,
                 $"Language '{languageId.Value}' is not known to GLTranslate.",
                 exception);
@@ -63,7 +63,7 @@ internal static class GoogleLanguageCodeResolver
         if (!language.Codes.TryGetValue(out Iso6391Code? code))
         {
             // The language is known to GLTranslate, but it has no ISO 639-1 code.
-            throw new TranslationProviderException(
+            throw new ProviderException(
                 ProviderName,
                 $"Language '{languageId.Value}' has no ISO 639-1 code, which Google Translate requires.");
         }
@@ -85,7 +85,7 @@ internal static class GoogleLanguageCodeResolver
     /// Thrown when <paramref name="googleLanguageCode"/> is empty or
     /// consists only of white-space characters.
     /// </exception>
-    /// <exception cref="TranslationProviderException">
+    /// <exception cref="ProviderException">
     /// Thrown when <paramref name="googleLanguageCode"/> does not match any
     /// language known to GLTranslate.
     /// </exception>
@@ -96,7 +96,7 @@ internal static class GoogleLanguageCodeResolver
         if (!LanguagesByIso6391.Value.TryGetValue(googleLanguageCode.ToLowerInvariant(), out LanguageId? languageId))
         {
             // The Google Translate endpoint returned a language code that is not known to GLTranslate.
-            throw new TranslationProviderException(
+            throw new ProviderException(
                 ProviderName,
                 $"Google Translate returned an unknown language code '{googleLanguageCode}'.");
         }

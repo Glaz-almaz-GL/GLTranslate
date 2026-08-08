@@ -1,5 +1,5 @@
 using GLTranslate.Abstractions.Linguistics.Languages;
-using GLTranslate.Abstractions.Translation;
+using GLTranslate.Abstractions.Providers;
 using GLTranslate.Providers.Google.Internal;
 
 namespace GLTranslate.Providers.Google.Tests;
@@ -28,7 +28,7 @@ public sealed class GoogleLanguageCodeResolverTests
     [Fact]
     public void ToGoogleCode_UnknownLanguageId_ThrowsTranslationProviderException()
     {
-        TranslationProviderException exception = Assert.Throws<TranslationProviderException>(
+        ProviderException exception = Assert.Throws<ProviderException>(
             () => GoogleLanguageCodeResolver.ToGoogleCode(new LanguageId("does_not_exist")));
 
         Assert.Equal("Google", exception.ProviderName);
@@ -48,7 +48,7 @@ public sealed class GoogleLanguageCodeResolverTests
     [Fact]
     public void FromGoogleCode_UnknownCode_ThrowsTranslationProviderException()
     {
-        TranslationProviderException exception = Assert.Throws<TranslationProviderException>(
+        ProviderException exception = Assert.Throws<ProviderException>(
             () => GoogleLanguageCodeResolver.FromGoogleCode("zz"));
 
         Assert.Equal("Google", exception.ProviderName);
