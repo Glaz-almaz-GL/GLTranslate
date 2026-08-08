@@ -31,7 +31,7 @@ public interface ITranslationClient<in TRequest, TResult>
     where TResult : ProviderResult
 {
     /// <summary>
-    /// Performs the translation operation described by the specified request.
+    /// Performs the operation described by the specified request.
     /// </summary>
     /// <param name="request">
     /// The request describing the operation to perform.
@@ -45,5 +45,5 @@ public interface ITranslationClient<in TRequest, TResult>
     /// <exception cref="ArgumentNullException">
     /// Thrown when <paramref name="request"/> is <see langword="null"/>.
     /// </exception>
-    Task<TResult> TranslateAsync(TRequest request, CancellationToken cancellationToken = default);
+    Task<TResult> ExecuteAsync(TRequest request, CancellationToken cancellationToken = default);
 }

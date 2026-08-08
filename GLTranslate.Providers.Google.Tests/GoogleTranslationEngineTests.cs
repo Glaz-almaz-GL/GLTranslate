@@ -89,4 +89,42 @@ public sealed class GoogleTranslationEngineTests
 
         await Assert.ThrowsAsync<ArgumentException>(() => engine.TranslateAsync(text, source, target));
     }
+
+    [Fact]
+    public async Task TransliterateAsync_SourceTransliterationPresent_ReturnsIt()
+    {
+        using StubHttpMessageHandler handler = new(_ => new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent(
+                """{"sentences":[{"trans":"Hello, world!","orig":"Привет, мир!"},{"src_translit":"Privet, mir!"}],"src":"ru"}""",
+                Encoding.UTF8,
+                "application/json"),
+        });
+        using HttpClient httpClient = new(handler);
+        GoogleTranslationEngine engine = new(httpClient);
+
+        (string transliteration, string sourceLanguageCode) = await engine.TransliterateAsync("Привет, мир!", "ru");
+
+        Assert.Equal("Privet, mir!", transliteration);
+        Assert.Equal("ru", sourceLanguageCode);
+    }
+
+    [Fact]
+    public async Task TransliterateAsync_NoSourceTransliteration_FallsBackToOriginalText()
+    {
+        using StubHttpMessageHandler handler = new(_ => new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent(
+                """{"sentences":[{"trans":"Hello world","orig":"Hello world"}],"src":"en"}""",
+                Encoding.UTF8,
+                "application/json"),
+        });
+        using HttpClient httpClient = new(handler);
+        GoogleTranslationEngine engine = new(httpClient);
+
+        (string transliteration, string sourceLanguageCode) = await engine.TransliterateAsync("Hello world", "en");
+
+        Assert.Equal("Hello world", transliteration);
+        Assert.Equal("en", sourceLanguageCode);
+    }
 }
