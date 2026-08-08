@@ -49,7 +49,7 @@ public sealed class Language :
     /// <summary>
     /// Gets the set of all code representations associated with this language.
     /// </summary>
-    public CodeSet<LanguageCode> Сodes { get; }
+    public CodeSet<LanguageCode> Codes { get; }
 
     /// <summary>
     /// Gets the writing systems supported by the language.
@@ -109,7 +109,7 @@ public sealed class Language :
         Direction = direction;
 
         Scripts = new EntitySet<Script, ScriptId>(scripts);
-        Сodes = new CodeSet<LanguageCode>(codes);
+        Codes = new CodeSet<LanguageCode>(codes);
     }
 
     #endregion

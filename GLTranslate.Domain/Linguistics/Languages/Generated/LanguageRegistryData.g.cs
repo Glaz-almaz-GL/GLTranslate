@@ -168,5 +168,5 @@ internal static class LanguageRegistryData
     // Keyed by raw ISO 639-1 code (e.g. "ru"), used to wire up cross-references
     // during generation. Not the same as the domain Id (see Language.Id).
     public static readonly ImmutableDictionary<string, Language> ByIso1 =
-        All.ToImmutableDictionary(x => x.Сodes.Get<Iso6391Code>().Value, x => x);
+        All.ToImmutableDictionary(x => x.Codes.Get<Iso6391Code>().Value, x => x);
 }

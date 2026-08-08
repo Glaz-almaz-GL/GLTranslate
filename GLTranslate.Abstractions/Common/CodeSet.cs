@@ -1,6 +1,7 @@
 ﻿using GLTranslate.Abstractions.Interfaces;
 using System.Collections;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 
 namespace GLTranslate.Abstractions.Common;
 
@@ -141,7 +142,7 @@ public sealed class CodeSet<TCode> : IReadOnlyList<TCode>
     /// <see langword="true"/> when the code exists;
     /// otherwise, <see langword="false"/>.
     /// </returns>
-    public bool TryGetValue<T>(out T? value)
+    public bool TryGetValue<T>([NotNullWhen(true)] out T? value)
         where T : class, TCode
     {
         if (_codes.TryGetValue(typeof(T), out TCode? code))
@@ -172,7 +173,7 @@ public sealed class CodeSet<TCode> : IReadOnlyList<TCode>
     /// <exception cref="ArgumentNullException">
     /// Thrown when <paramref name="type"/> is <see langword="null"/>.
     /// </exception>
-    public bool TryGetValue(Type type, out TCode? value)
+    public bool TryGetValue(Type type, [NotNullWhen(true)] out TCode? value)
     {
         ArgumentNullException.ThrowIfNull(type);
 

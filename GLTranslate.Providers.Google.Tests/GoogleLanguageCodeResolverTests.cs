@@ -1,0 +1,78 @@
+using GLTranslate.Abstractions.Linguistics.Languages;
+using GLTranslate.Abstractions.Translation;
+using GLTranslate.Providers.Google.Internal;
+
+namespace GLTranslate.Providers.Google.Tests;
+
+public sealed class GoogleLanguageCodeResolverTests
+{
+    [Fact]
+    public void ToGoogleCode_NullLanguageId_ReturnsAuto()
+    {
+        string code = GoogleLanguageCodeResolver.ToGoogleCode(null);
+
+        Assert.Equal("auto", code);
+    }
+
+    [Theory]
+    [InlineData("russian", "ru")]
+    [InlineData("english", "en")]
+    [InlineData("french", "fr")]
+    public void ToGoogleCode_KnownLanguage_ReturnsIso6391Code(string languageId, string expectedCode)
+    {
+        string code = GoogleLanguageCodeResolver.ToGoogleCode(new LanguageId(languageId));
+
+        Assert.Equal(expectedCode, code);
+    }
+
+    [Fact]
+    public void ToGoogleCode_UnknownLanguageId_ThrowsTranslationProviderException()
+    {
+        TranslationProviderException exception = Assert.Throws<TranslationProviderException>(
+            () => GoogleLanguageCodeResolver.ToGoogleCode(new LanguageId("does_not_exist")));
+
+        Assert.Equal("Google", exception.ProviderName);
+    }
+
+    [Theory]
+    [InlineData("ru", "russian")]
+    [InlineData("en", "english")]
+    [InlineData("EN", "english")]
+    public void FromGoogleCode_KnownCode_ReturnsLanguageId(string googleCode, string expectedLanguageId)
+    {
+        LanguageId languageId = GoogleLanguageCodeResolver.FromGoogleCode(googleCode);
+
+        Assert.Equal(expectedLanguageId, languageId.Value);
+    }
+
+    [Fact]
+    public void FromGoogleCode_UnknownCode_ThrowsTranslationProviderException()
+    {
+        TranslationProviderException exception = Assert.Throws<TranslationProviderException>(
+            () => GoogleLanguageCodeResolver.FromGoogleCode("zz"));
+
+        Assert.Equal("Google", exception.ProviderName);
+    }
+
+    [Fact]
+    public void FromGoogleCode_EmptyCode_ThrowsArgumentException()
+    {
+        Assert.Throws<ArgumentException>(() => GoogleLanguageCodeResolver.FromGoogleCode(" "));
+    }
+
+    [Theory]
+    [InlineData("russian")]
+    [InlineData("english")]
+    [InlineData("french")]
+    [InlineData("german")]
+    [InlineData("japanese")]
+    public void ToGoogleCode_ThenFromGoogleCode_RoundTrips(string languageId)
+    {
+        LanguageId original = new(languageId);
+
+        string googleCode = GoogleLanguageCodeResolver.ToGoogleCode(original);
+        LanguageId roundTripped = GoogleLanguageCodeResolver.FromGoogleCode(googleCode);
+
+        Assert.Equal(original, roundTripped);
+    }
+}
